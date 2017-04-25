@@ -14,8 +14,8 @@ def test1():
 def test2():
     d = dict(aa=11, bb=22, cc='casandra')
     opt = Settings(d)
-    opt.set('foo', 999)
-    opt['bar'] = 'baracuda'
+    opt.foo = 999
+    opt.bar = 'baracuda'
     print(opt)
     for key in sorted(opt):
         print("Value of %s is: %s" % (key, opt[key]))

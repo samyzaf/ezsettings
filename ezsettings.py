@@ -63,4 +63,4 @@ class Settings(object):
         line = ', '.join(state)
         if len(line) > 150:
             line = line[0:150] + ' ...'
-        return 'Settings(' + line + ')'
+        return 'Settings(%s)' % (line,)

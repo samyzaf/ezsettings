@@ -56,7 +56,7 @@ def test2():
     # Later we can add new items to opt
     opt.address = "13 Oak street, Flintstone 520092, Nebraska, USA"
 
-    # Settings support set/get methods
+    # Settings object supports set/get methods
     for key in ['x', 'y', 'z']:
         opt.set(key, 0.0)
     for key in ['weight', 'age', 'name']:

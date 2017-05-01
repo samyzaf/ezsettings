@@ -1,36 +1,74 @@
 from ezsettings import Settings
 
 def test1():
-    opt = Settings(aa=11, bb=22, cc='casandra')
-    opt.set('foo', 999)
-    opt.update(bb=22.22, bar='33.33', poo=4.44, zoo=5.55)
-    print("opt.aa =", opt.aa)
-    print("opt.cc =", opt.cc)
-    print(dir(opt))
-    opt.pop('aa')
-    for key in sorted(opt):
-        print("Value of %s is: %s" % (key, opt.get(key)))
+    # Initializing Settings object opt with 5 parameters:
+    #    a - integer
+    #    b - integer
+    #    c - string
+    #    d - list
+    #    e - set
+    opt = Settings(a=1, b=2, c='casandra', d=list([1,2,3]), e=set(['king', 2.3, 'queen']))
+
+    # Adding a function object to opt
+    opt.f = lambda x: x**2 - 7*x + 12
+
+    # Adding 3 more integer parameters
+    opt.update(x=10, y=20, z=30)
+
+    # Adding a nested Settings object to opt:
+    opt.foo = Settings(a=0.1, b=0.2, c=0.3)
+
+    # You can access these paramaters by:
+    #    opt.foo.a
+    #    opt.foo.b
+    #    opt.foo.c
+
+    # Updating opt.foo with new parameters
+    opt.foo.date = 'May 01, 2017'
+    opt.foo.email = 'opt@settings.com'
+
+    # Adding nested Settings objects to opt (recursive settings)
+    opt.bar = Settings(weight=40, height=50, price=65)
+    opt.bar.moo = Settings(weight=400, height=850, price=920)
+
+    print(opt)
+
+# Result of test1() should be:
+#   a = 1
+#   b = 2
+#   bar = Settings(height=50, moo=Settings(height=850, price=920, weight=400), price=65, weight=40)
+#   c = 'casandra'
+#   d = [1, 2, 3]
+#   e = {2.3, 'king', 'queen'}
+#   f = <function test1.<locals>.<lambda> at 0x000001B770A26598>
+#   foo = Settings(a=0.1, b=0.2, c=0.3, date='May 01, 2017', email='opt@settings.com')
+#   x = 10
+#   y = 20
+#   z = 30
 
 def test2():
-    d = dict(aa=11, bb=22, cc='casandra')
+    # d is a standard Python dictionar
+    d = dict(weight=50, age=20, name='casandra')
+
+    # It can be used to initialize a Settings object
     opt = Settings(d)
-    opt.foo = 999
-    opt.bar = 'baracuda'
-    print(opt)
+
+    # Later we can add new items to opt
+    opt.address = "13 Oak street, Flintstone 520092, Nebraska, USA"
+
+    # Settings support set/get methods
+    for key in ['x', 'y', 'z']:
+        opt.set(key, 0.0)
+    for key in ['weight', 'age', 'name']:
+        print(opt.get(key))
+    
+    # Settings object supports bracket subscripting: opt[key]
     for key in sorted(opt):
         print("Value of %s is: %s" % (key, opt[key]))
 
-def test3():
-    d = dict(aa=11, bb=22, cc='casandra')
-    opt = Settings(d, dd='dothan', ee=55)
-    for key in sorted(opt):
-        print("%s = %s" % (key, opt.get(key)))
-
-def test4():
-    d = dict(aa=11, bb=22, cc='casandra')
-    opt = Settings(d, dd='dothan', ee=55)
     print(opt)
 
 if __name__ == '__main__':
     test1()
+    test2()
 

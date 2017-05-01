@@ -1,5 +1,5 @@
-# The usage is explained in the tests
-# The only deficiency is that you are not allowed to use the forllowing keywords as keys in your settings:
+# The usage is explained in the the file "tests.py"
+# The only deficiency is that you are not allowed to use the following keywords as keys in your settings:
 # 'set', 'get', 'pop', 'update', 'delete', 'keys'
 # You should also avoid dunder keywords (of the form: __keyword__)
 # otherwise, the sky is the limit ...

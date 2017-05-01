@@ -1,4 +1,4 @@
 # ezsettings
 * Simplest settings manager class.
-* Look a tests.py for simple usage examples.
+* Look at the file "tests.py" for simple usage examples.
 

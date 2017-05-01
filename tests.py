@@ -47,7 +47,7 @@ def test1():
 #    z = 30
 
 def test2():
-    # d is a standard Python dictionar
+    # d is a standard Python dictionary
     d = dict(weight=50, age=20, name='casandra')
 
     # It can be used to initialize a Settings object

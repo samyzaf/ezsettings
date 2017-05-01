@@ -28,23 +28,23 @@ def test1():
     opt.foo.email = 'opt@settings.com'
 
     # Adding nested Settings objects to opt (recursive settings)
-    opt.bar = Settings(weight=40, height=50, price=65)
-    opt.bar.moo = Settings(weight=400, height=850, price=920)
+    opt.bar = Settings(weight=80, height=1.75, age=45)
+    opt.bar.edu = Settings(elem='oakelm', high='oakhigh', college='oakcoll')
 
     print(opt)
 
 # Result of test1() should be:
-#   a = 1
-#   b = 2
-#   bar = Settings(height=50, moo=Settings(height=850, price=920, weight=400), price=65, weight=40)
-#   c = 'casandra'
-#   d = [1, 2, 3]
-#   e = {2.3, 'king', 'queen'}
-#   f = <function test1.<locals>.<lambda> at 0x000001B770A26598>
-#   foo = Settings(a=0.1, b=0.2, c=0.3, date='May 01, 2017', email='opt@settings.com')
-#   x = 10
-#   y = 20
-#   z = 30
+#    a = 1
+#    b = 2
+#    bar = Settings(age=45, edu=Settings(college='oakcoll', elem='oakelm', high='oakhigh'), height=1.75, weight=80)
+#    c = 'casandra'
+#    d = [1, 2, 3]
+#    e = {2.3, 'queen', 'king'}
+#    f = <function test1.<locals>.<lambda> at 0x00000277CBFF6598>
+#    foo = Settings(a=0.1, b=0.2, c=0.3, date='May 01, 2017', email='opt@settings.com')
+#    x = 10
+#    y = 20
+#    z = 30
 
 def test2():
     # d is a standard Python dictionar
@@ -70,5 +70,5 @@ def test2():
 
 if __name__ == '__main__':
     test1()
-    test2()
+    #test2()
 

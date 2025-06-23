@@ -32,6 +32,7 @@ def test1():
     opt.bar.edu = Settings(elem='oakelm', high='oakhigh', college='oakcoll')
 
     print(opt)
+    return opt
 
 # Result of test1() should be:
 #    a = 1
@@ -67,8 +68,16 @@ def test2():
         print("Value of %s is: %s" % (key, opt[key]))
 
     print(opt)
+    return opt
+
+def test3():
+    opt = test2()
+    opt.__dict__= "This should not work! You may not use basic attributes as keys!"
+    opt.set = "This should not work! You may not use basic attributes as keys!"
+    opt.set("update", "This should not work! You may not use basic attributes as keys! 2")
+    return opt
 
 if __name__ == '__main__':
-    test1()
+    #test1()
     #test2()
-
+    test3()

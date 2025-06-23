@@ -1,5 +1,6 @@
 # The usage is explained in the the file "tests.py"
-# The only deficiency is that you are not allowed to use the Settings class attributes:
+# The only deficiency is that you are not allowed to use the Settings class attributes
+# as keys in your settings object:
 #   delete, get, keys, pop, set, update,
 #   __class__, __delattr__, __dict__, __dir__, __doc__, __eq__, __format__, __ge__,
 #   __getattribute__, __getitem__, __gt__, __hash__, __init__, __init_subclass__,

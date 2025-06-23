@@ -1,19 +1,25 @@
 # The usage is explained in the the file "tests.py"
-# The only deficiency is that you are not allowed to use the following keywords as keys in your settings:
-# 'set', 'get', 'pop', 'update', 'delete', 'keys'
-# You should also avoid dunder keywords (of the form: __keyword__)
-# otherwise, the sky is the limit ...
+# The only deficiency is that you are not allowed to use the Settings class attributes:
+#   delete, get, keys, pop, set, update,
+#   __class__, __delattr__, __dict__, __dir__, __doc__, __eq__, __format__, __ge__,
+#   __getattribute__, __getitem__, __gt__, __hash__, __init__, __init_subclass__,
+#   __iter__, __le__, __lt__, __module__, __ne__, __new__, __reduce__, __reduce_ex__,
+#   __repr__, __setattr__, __setitem__, __sizeof__, __str__, __subclasshook__, __weakref__
+# otherwise, the sky is the limit ... !
+# An attempt to use one of these keys will raise an Exception
 
 DEFAULT_VALUE = object()
 
 class Settings(object):
     "Settings management class. See tests.py in package for usage examples"
-    def __init__(self, ___dictionary=None, **opt):
+    def __init__(self, ___dictionary=None, **kwargs):
         if not ___dictionary is None:
             self.__dict__.update(___dictionary)
-        self.__dict__.update(opt)
+        self.__dict__.update(kwargs)
 
     def set(self, key, value):
+        if key in RESERVED_KEYS:
+            raise Exception(f"Reserved Key Error: {key} is reserved. You cannot use it.")
         self.__dict__[key] = value
         return value
 
@@ -66,5 +72,11 @@ class Settings(object):
             line = line[0:150] + ' ...'
         return 'Settings(' + line + ')'
 
-__all__ = [Settings]
+    def __setattr__(self, key, value):
+        if key in RESERVED_KEYS:
+            raise Exception(f"Reserved Key Error: {key} is reserved. You cannot use it.")
+        super().__setattr__(key, value)
 
+RESERVED_KEYS = dir(Settings)
+
+__all__ = [Settings]

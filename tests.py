@@ -19,13 +19,17 @@ def test1():
     opt.foo = Settings(a=0.1, b=0.2, c=0.3)
 
     # You can access these paramaters by:
-    #    opt.foo.a
-    #    opt.foo.b
-    #    opt.foo.c
+    print(f"opt.foo.a = {opt.foo.a}")
+    print(f"opt.foo.b = {opt.foo.b}")
+    print(f"opt.foo.c = {opt.foo.c}")
 
     # Updating opt.foo with new parameters
     opt.foo.date = 'May 01, 2017'
     opt.foo.email = 'opt@settings.com'
+
+    print(f"opt.foo.date = {opt.foo.date}")
+    print(f"opt.foo.email = {opt.foo.email}")
+    print(f"opt.foo =\n{opt.foo}")
 
     # Adding nested Settings objects to opt (recursive settings)
     opt.bar = Settings(weight=80, height=1.75, age=45)
@@ -61,20 +65,36 @@ def test2():
     for key in ['x', 'y', 'z']:
         opt.set(key, 0.0)
     for key in ['weight', 'age', 'name']:
-        print(opt.get(key))
+        print(f"opt.{key} = {opt.get(key)}")
     
     # Settings object supports bracket subscripting: opt[key]
     for key in sorted(opt):
-        print("Value of %s is: %s" % (key, opt[key]))
+        print(f"Value of {key} is: {opt[key]}")
 
     print(opt)
     return opt
 
 def test3():
-    opt = test2()
-    opt.__dict__= "This should not work! You may not use basic attributes as keys!"
-    opt.set = "This should not work! You may not use basic attributes as keys!"
-    opt.set("update", "This should not work! You may not use basic attributes as keys! 2")
+    opt = Settings(a=1, b=2, c='casandra', d=list([1,2,3]), e=set(['king', 2.3, 'queen']))
+    opt.foo = Settings(a=0.1, b=0.2, c=0.3)
+
+    try:
+        opt.__dict__= "This should not work! You may not use basic attributes as keys!"
+    except Exception as e:
+        print(f"Exception occured when trying to use '__dict__' as a key: {e}")
+
+    try:
+        opt.set = "This should not work! You may not use basic attributes as keys!"
+    except Exception as e:
+        print(f"Exception occured when trying to use 'set' as a key: {e}")
+
+    try:
+        opt.set("update", "This should not work! You may not use basic attributes as keys! 2")
+    except Exception as e:
+        print(f"Exception occured when trying to use 'update' as a key: {e}")
+
+    print("Lets print opt and see if anything changed?")
+    print(opt)
     return opt
 
 if __name__ == '__main__':
